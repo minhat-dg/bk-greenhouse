@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_home.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background.xml" value="0.143" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background_orange.xml" value="0.143" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/ic_temp.xml" value="0.1115" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/thumb.xml" value="0.1505" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/track.xml" value="0.1505" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/loading_please_wait.xml" value="0.175" />
       </map>
     </option>
   </component>

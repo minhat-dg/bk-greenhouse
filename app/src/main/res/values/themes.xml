@@ -13,4 +13,17 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    
+    <style name="header1">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="header2">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="header3">
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.example.bkgreenhouse.databinding.ActivityHomeBinding;
 
@@ -20,47 +22,122 @@ import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
-    String KEY = "aio_sVox31ArO0laWWiQ0rD8V1cSl5x3";
-    String LED_GET_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-led/data/retain";
-    String LED_POST_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-led/data";
-
+    String KEY = "aio_Juvs623hQrLI7NCNgarHhflzP8Od";
+    ApiUrl apiUrl = new ApiUrl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        new GetBtn().execute(LED_GET_URL);
+        loadData();
 
-        binding.btnPush.setOnClickListener(new View.OnClickListener() {
+        binding.btnLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleBtn();
+                Log.d("HomeAc", "CLICK");
+                if (binding.btnLight.isChecked()){
+                    Log.d("HomeAc", "checked");
+                    new PostData("1","LED").execute(apiUrl.getLED_POST_URL());
+                } else {
+                    Log.d("HomeAc", "not checked");
+                    new PostData("0", "LED").execute(apiUrl.getLED_POST_URL());
+                }
+            }
+        });
+
+        binding.btnWater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.btnWater.isChecked()){
+                    Log.d("HomeAc", "checked");
+                    new PostData("2","PUMP").execute(apiUrl.getPUMP_POST_URL());
+                } else {
+                    Log.d("HomeAc", "not checked");
+                    new PostData("3", "PUMP").execute(apiUrl.getPUMP_POST_URL());
+                }
             }
         });
     }
 
-    private void toggleBtn() {
-        if (binding.btnPush.getText() == "On") {
-            new PostBtn("0").execute(LED_POST_URL);
-        }
-        else {
-            new PostBtn("1").execute(LED_POST_URL);
+    private void loadData() {
+        loadBtnStt();
+        loadDashboard();
+    }
+
+    private void refresh(int millisecond) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                loadDashboard();
+            }
+        };
+        handler.postDelayed(runnable, millisecond);
+    }
+
+    private void loadBtnStt() {
+        new GetData("LED").execute(apiUrl.getLED_GET_URL());
+        new GetData("PUMP").execute(apiUrl.getPUMP_GET_URL());
+    }
+
+    private void loadDashboard() {
+        new GetData("TEMP").execute(apiUrl.getTEMP_GET_URL());
+        new GetData("HUMID").execute(apiUrl.getHUMID_GET_URL());
+        refresh(3000);
+    }
+
+    private void setView(String substring, String name) {
+        switch (name){
+            case "LED":
+                toggleBtnLight(substring);
+                break;
+            case "PUMP":
+                toggleBtnPump(substring);
+                break;
+            case "TEMP":
+                setTemp(substring);
+                break;
+            case "HUMID":
+                setHumid(substring);
+                break;
         }
     }
 
-    private void setBtn(String substring) {
-        if (substring.equals("1"))
-            binding.btnPush.setText("On");
+    private void setHumid(String value) {
+        binding.tvHumidValue.setText(value);
+    }
+
+    private void setTemp(String value) {
+        binding.tvTempValue.setText(value);
+    }
+
+    private void toggleBtnPump(String value) {
+        if (value.equals("2")) {
+            binding.btnWater.setChecked(true);
+        } else {
+            binding.btnWater.setChecked(false);
+        }
+    }
+
+    private void toggleBtnLight(String value) {
+        if (value.equals("1"))
+            binding.btnLight.setChecked(true);
         else
-            binding.btnPush.setText("Off");
+            binding.btnLight.setChecked(false);
     }
 
-    class GetBtn extends AsyncTask<String, String, String>{
-        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(15, TimeUnit.SECONDS)
+
+    class GetData extends AsyncTask<String, String, String>{
+        OkHttpClient client = new OkHttpClient.Builder()
                 .build();
 
+        String name;
+        GetData(String name){
+            this.name = name;
+        }
         @Override
         protected String doInBackground(String... strings) {
             Request request = new Request.Builder()
@@ -78,17 +155,19 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            setBtn(s.substring(0,1));
+            setView(s.substring(0,s.indexOf(",")), name);
             super.onPostExecute(s);
         }
     }
 
-    class PostBtn extends AsyncTask<String, String, Void>{
-        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(15, TimeUnit.SECONDS)
+    class PostData extends AsyncTask<String, String, Void>{
+        OkHttpClient client = new OkHttpClient.Builder()
                 .build();
         String value;
-        PostBtn(String value){
+        String name;
+        PostData(String value, String name){
             this.value = value;
+            this.name = name;
         }
         @Override
         protected Void doInBackground(String... strings) {
@@ -97,13 +176,15 @@ public class HomeActivity extends AppCompatActivity {
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
             Request request = new Request.Builder()
                     .url(strings[0])
-                    .addHeader("X-AIO-Key","aio_Juvs623hQrLI7NCNgarHhflzP8Od")
+                    .addHeader("X-AIO-Key", KEY)
                     .addHeader("Content-Type", "application/json")
                     .post(requestBody)
                     .build();
 
             try {
                 Response response = client.newCall(request).execute();
+                Log.d("HomeAc", response.body().string());
+                Log.d("HomeAc", response.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -112,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void unused) {
-            setBtn(value);
+            setView(value, name);
             super.onPostExecute(unused);
         }
     }

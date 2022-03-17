@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="main">#019267</color>
+    <color name="second">#00C897</color>
+    <color name="orange">#FFD365</color>
+    <color name="light_yellow">#FDFFA9</color>
+    <color name="dark_grey">#4E4E4E</color>
+    <color name="light_grey">#8C8C8C</color>
 </resources>
