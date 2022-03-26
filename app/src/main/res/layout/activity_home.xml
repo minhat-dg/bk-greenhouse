@@ -145,13 +145,13 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/btn_light"
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_light"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:thumb="@drawable/thumb"
-                app:track="@drawable/track"/>
+                app:track="@drawable/track" />
 
         </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.example.bkgreenhouse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,9 +12,21 @@ import android.widget.CompoundButton;
 
 import com.example.bkgreenhouse.databinding.ActivityHomeBinding;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,8 +35,13 @@ import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
-    String KEY = "aio_Juvs623hQrLI7NCNgarHhflzP8Od";
     ApiUrl apiUrl = new ApiUrl();
+    MQTTSingleton mqtt = MQTTSingleton.getInstance(HomeActivity.this);
+
+    String topicTemp = "luongcao2202/feeds/bbc-temp";
+    String topicHumid = "luongcao2202/feeds/bbc-humi";
+    String topicLed = "luongcao2202/feeds/bbc-led";
+    String topicPump = "luongcao2202/feeds/bbc-pump";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +51,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         loadData();
+        subscribeMQTT();
 
         binding.btnLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("HomeAc", "CLICK");
                 if (binding.btnLight.isChecked()){
-                    Log.d("HomeAc", "checked");
-                    new PostData("1","LED").execute(apiUrl.getLED_POST_URL());
+                    mqtt.publish(topicLed, "1");
                 } else {
-                    Log.d("HomeAc", "not checked");
-                    new PostData("0", "LED").execute(apiUrl.getLED_POST_URL());
+                    mqtt.publish(topicLed, "0");
                 }
             }
         });
@@ -52,55 +68,40 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (binding.btnWater.isChecked()){
-                    Log.d("HomeAc", "checked");
-                    new PostData("2","PUMP").execute(apiUrl.getPUMP_POST_URL());
+                    mqtt.publish(topicPump, "2");
                 } else {
-                    Log.d("HomeAc", "not checked");
-                    new PostData("3", "PUMP").execute(apiUrl.getPUMP_POST_URL());
+                    mqtt.publish(topicPump, "3");
                 }
             }
         });
     }
-
     private void loadData() {
-        loadBtnStt();
-        loadDashboard();
+        new GetData("led").execute(apiUrl.getLED_GET_URL());
+        new GetData("pump").execute(apiUrl.getPUMP_GET_URL());
+        new GetData("temp").execute(apiUrl.getTEMP_GET_URL());
+        new GetData("humi").execute(apiUrl.getHUMID_GET_URL());
     }
 
-    private void refresh(int millisecond) {
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                loadDashboard();
-            }
-        };
-        handler.postDelayed(runnable, millisecond);
+    private void subscribeMQTT() {
+        mqtt.subscribe(topicLed, HomeActivity.this);
+        mqtt.subscribe(topicPump, HomeActivity.this);
+        mqtt.subscribe(topicHumid, HomeActivity.this);
+        mqtt.subscribe(topicTemp, HomeActivity.this);
     }
 
-    private void loadBtnStt() {
-        new GetData("LED").execute(apiUrl.getLED_GET_URL());
-        new GetData("PUMP").execute(apiUrl.getPUMP_GET_URL());
-    }
 
-    private void loadDashboard() {
-        new GetData("TEMP").execute(apiUrl.getTEMP_GET_URL());
-        new GetData("HUMID").execute(apiUrl.getHUMID_GET_URL());
-        refresh(3000);
-    }
-
-    private void setView(String substring, String name) {
+    public void setView(String substring, String name) {
         switch (name){
-            case "LED":
+            case "led":
                 toggleBtnLight(substring);
                 break;
-            case "PUMP":
+            case "pump":
                 toggleBtnPump(substring);
                 break;
-            case "TEMP":
+            case "temp":
                 setTemp(substring);
                 break;
-            case "HUMID":
+            case "humi":
                 setHumid(substring);
                 break;
         }
@@ -123,10 +124,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void toggleBtnLight(String value) {
-        if (value.equals("1"))
+        if (value.equals("1")) {
             binding.btnLight.setChecked(true);
-        else
+        }
+        else{
             binding.btnLight.setChecked(false);
+        }
     }
 
 
@@ -157,44 +160,6 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             setView(s.substring(0,s.indexOf(",")), name);
             super.onPostExecute(s);
-        }
-    }
-
-    class PostData extends AsyncTask<String, String, Void>{
-        OkHttpClient client = new OkHttpClient.Builder()
-                .build();
-        String value;
-        String name;
-        PostData(String value, String name){
-            this.value = value;
-            this.name = name;
-        }
-        @Override
-        protected Void doInBackground(String... strings) {
-            String json = "{\"datum\":{\"value\":\""+ value +"\"}}";
-
-            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
-            Request request = new Request.Builder()
-                    .url(strings[0])
-                    .addHeader("X-AIO-Key", KEY)
-                    .addHeader("Content-Type", "application/json")
-                    .post(requestBody)
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-                Log.d("HomeAc", response.body().string());
-                Log.d("HomeAc", response.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void unused) {
-            setView(value, name);
-            super.onPostExecute(unused);
         }
     }
 }

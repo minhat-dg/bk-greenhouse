@@ -2,9 +2,9 @@ package com.example.bkgreenhouse;
 
 public class ApiUrl {
     private String LED_GET_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-led/data/retain";
-    private String LED_POST_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-led/data";
+    private String LED_POST_URL = "https://io.adafruit.com/api/v2/webhooks/feed/dehU3wzHz27KfgpLMu59SLLawaMY";
     private String PUMP_GET_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-pump/data/retain";
-    private String PUMP_POST_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-pump/data";
+    private String PUMP_POST_URL = "https://io.adafruit.com/api/v2/webhooks/feed/2nNf7SKii7ceXbkPjox8FyfgoAZ3";
     private String TEMP_GET_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-temp/data/retain";
     private String HUMID_GET_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-humi/data/retain";
 

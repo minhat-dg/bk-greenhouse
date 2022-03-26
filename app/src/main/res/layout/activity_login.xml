@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/tv_login"
+        style="@style/header0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="150dp"
+        android:text="Đăng nhập"
+        android:textColor="@color/dark_grey" />
+
+    <TextView
+        android:id="@+id/tv_cap_login"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_login"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Sử dụng username và active key được lấy từ Adafruit"
+        android:textColor="@color/dark_grey"/>
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tv_cap_login"
+        android:background="@drawable/edit_text"
+        android:hint="Username"
+        android:padding="15dp"/>
+
+    <EditText
+        android:id="@+id/et_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/et_username"
+        android:background="@drawable/edit_text"
+        android:hint="Active key"
+        android:padding="15dp"/>
+
+    <CheckBox
+        android:id="@+id/cb_remeber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhớ mật khẩu"
+        style="@style/body_bold"
+        android:textColor="@color/dark_grey"
+        android:layout_below="@id/et_key"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"/>
+    
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_below="@id/cb_remeber"
+        android:layout_marginTop="20dp"
+        android:text="Đăng nhập"
+        style="@style/header2"
+        android:textAllCaps="false"
+        android:textColor="@color/light_yellow"
+        android:background="@drawable/button_login"/>
+
+
+</RelativeLayout>
