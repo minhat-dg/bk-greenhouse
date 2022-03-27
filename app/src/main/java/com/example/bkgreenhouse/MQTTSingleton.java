@@ -1,5 +1,6 @@
 package com.example.bkgreenhouse;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -20,8 +21,21 @@ public class MQTTSingleton {
     private static MQTTSingleton instance = null;
     private static MqttAndroidClient client;
     private static Context mContext;
+    private static LoginActivity mActivity;
     private static String username, key;
 
+    public static MQTTSingleton getInstance(Context context, LoginActivity activity){
+        if(instance == null){
+            synchronized(MQTTSingleton.class){
+                if(instance == null){
+                    mContext = context;
+                    mActivity = activity;
+                    instance = new MQTTSingleton();
+                }
+            }
+        }
+        return instance;
+    }
     public static MQTTSingleton getInstance(Context context){
         if(instance == null){
             synchronized(MQTTSingleton.class){
@@ -33,6 +47,7 @@ public class MQTTSingleton {
         }
         return instance;
     }
+
     private MQTTSingleton() {
         this.client = new MqttAndroidClient(mContext, "tcp://io.adafruit.com:1883", "ABC");
     }
@@ -64,6 +79,8 @@ public class MQTTSingleton {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     // Something went wrong e.g. connection timeout or firewall problems
                     Log.d("mqtt", "onFailure");
+                    mActivity.dialog.hide();
+                    Toast.makeText(mContext, "Đăng nhập thất bại! Vui lòng kiểm tra username và active key.", Toast.LENGTH_LONG).show();
                 }
             });
         } catch (MqttException e) {

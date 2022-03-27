@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     MqttAndroidClient client;
     private Boolean remember;
-    CustomProgressDialog dialog;
+    public CustomProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,9 +95,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void connect(String username, String key) {
-        MQTTSingleton mqtt = MQTTSingleton.getInstance(LoginActivity.this);
-        mqtt.setUsername("luongcao2202");
-        mqtt.setKey("aio_JbII57Xa8WpVmpyYgqOB6jGaP0pl");
+        MQTTSingleton mqtt = MQTTSingleton.getInstance(LoginActivity.this, LoginActivity.this);
+        mqtt.setUsername(username);
+        mqtt.setKey(key);
         mqtt.connect();
     }
 
