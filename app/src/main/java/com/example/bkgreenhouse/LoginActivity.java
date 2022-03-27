@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
     private void connect(String username, String key) {
         MQTTSingleton mqtt = MQTTSingleton.getInstance(LoginActivity.this);
         mqtt.setUsername("luongcao2202");
-        mqtt.setKey("aio_TXmL77LTQWiqCj2IZhfoQVSOTZv0");
+        mqtt.setKey("aio_JbII57Xa8WpVmpyYgqOB6jGaP0pl");
         mqtt.connect();
     }
 

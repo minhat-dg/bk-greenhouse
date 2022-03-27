@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Nhà kính 1"
         android:textColor="@color/dark_grey" />
     
     <RelativeLayout
         android:id="@+id/container_stt"
-        android:layout_width="350dp"
-        android:layout_height="160dp"
+        android:layout_width="340dp"
+        android:layout_height="140dp"
         android:background="@drawable/background_second"
         android:layout_below="@id/tv_name"
         android:layout_centerHorizontal="true"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_below="@id/item_temp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
 
             <ImageView
                 android:id="@+id/im_ic_humid"
@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/container_stt"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <RelativeLayout
             android:layout_width="150dp"
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bóng đèn"
-                style="@style/header3"
+                style="@style/header4"
                 android:textColor="@color/dark_grey"
                 android:layout_below="@id/im_ic_light"
                 android:layout_centerHorizontal="true"/>
@@ -175,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vòi tưới"
-                style="@style/header3"
+                style="@style/header4"
                 android:textColor="@color/dark_grey"
                 android:layout_below="@id/im_ic_running_water"
                 android:layout_centerHorizontal="true"/>
@@ -200,7 +200,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/container_btn_line1"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <RelativeLayout
             android:layout_width="150dp"
@@ -221,7 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phun sương"
-                style="@style/header3"
+                style="@style/header4"
                 android:textColor="@color/dark_grey"
                 android:layout_below="@id/im_ic_water"
                 android:layout_centerHorizontal="true"/>
@@ -258,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Loa báo động"
-                style="@style/header3"
+                style="@style/header4"
                 android:textColor="@color/dark_grey"
                 android:layout_below="@id/im_ic_buzzer"
                 android:layout_centerHorizontal="true"/>
@@ -272,6 +272,74 @@
                 android:layout_centerHorizontal="true"
                 android:thumb="@drawable/thumb"
                 app:track="@drawable/track"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_btn_line3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_btn_line2"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/background_white"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/im_ic_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lịch tưới"
+                android:layout_marginTop="0dp"
+                style="@style/header3"
+                android:textColor="@color/second"
+                android:layout_below="@id/im_ic_calendar"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/background_white"
+            android:padding="10dp"
+            android:clickable="true"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/im_ic_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_chart"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thống kê"
+                android:layout_marginTop="0dp"
+                style="@style/header3"
+                android:textColor="@color/second"
+                android:layout_below="@id/im_ic_chart"
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 

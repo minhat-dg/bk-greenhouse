@@ -28,6 +28,10 @@
     </style>
     <style name="header3">
         <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="header4">
+        <item name="fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">14sp</item>
     </style>
     <style name="text_box">
