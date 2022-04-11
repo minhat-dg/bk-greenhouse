@@ -72,11 +72,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void clickLogin() {
-        dialog.show();
         String username = binding.etUsername.getText().toString().trim();
         String key = binding.etKey.getText().toString().trim();
         if(!checkValidData(username, key))
             return;
+        dialog.show();
         rememberLogin(username, key, remember);
         connect(username, key);
     }

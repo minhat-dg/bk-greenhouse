@@ -44,26 +44,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nhiệt độ:"
-                style="@style/header2"
+                style="@style/header3"
                 android:textColor="@color/light_yellow"
                 android:layout_marginStart="10dp"/>
 
             <TextView
                 android:id="@+id/tv_temp_value"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="..."
-                style="@style/header2"
+                style="@style/header3"
                 android:textColor="@color/light_yellow"
-                android:layout_marginStart="60dp"/>
+                android:layout_marginLeft="115dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="°C"
-                style="@style/header2"
+                style="@style/header3"
                 android:textColor="@color/light_yellow"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="10dp"/>
 
         </LinearLayout>
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_below="@id/item_temp"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/im_ic_humid"
@@ -85,27 +85,71 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Độ ẩm:"
-                style="@style/header2"
+                android:text="Độ ẩm không khí:"
+                style="@style/header3"
                 android:textColor="@color/light_yellow"
                 android:layout_marginStart="10dp"/>
 
             <TextView
                 android:id="@+id/tv_humid_value"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="..."
-                style="@style/header2"
+                style="@style/header3"
                 android:textColor="@color/light_yellow"
-                android:layout_marginStart="82dp"/>
+                android:layout_marginLeft="34dp"/>
+
+            <TextView
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                style="@style/header3"
+                android:textColor="@color/light_yellow"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_moister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_below="@id/item_humid"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/im_ic_moister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_moister"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="%"
-                style="@style/header2"
+                android:text="Độ ẩm đất:"
+                style="@style/header3"
                 android:textColor="@color/light_yellow"
-                android:layout_marginStart="20dp"/>
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_moister_value"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="..."
+                style="@style/header3"
+                android:textColor="@color/light_yellow"
+                android:layout_marginLeft="98dp"/>
+
+            <TextView
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                style="@style/header3"
+                android:textColor="@color/light_yellow"
+                android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
 
@@ -286,6 +330,7 @@
         android:layout_marginTop="20dp">
 
         <RelativeLayout
+            android:id="@+id/btn_schedule"
             android:layout_width="150dp"
             android:layout_height="80dp"
             android:background="@drawable/background_white"
@@ -315,6 +360,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/btn_analyze"
             android:layout_width="150dp"
             android:layout_height="80dp"
             android:background="@drawable/background_white"
@@ -340,6 +386,57 @@
                 android:textColor="@color/second"
                 android:layout_below="@id/im_ic_chart"
                 android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_btn_line4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_btn_line3"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/btn_sensor"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/background_white"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/im_ic_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_setting"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_sensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cảm biến"
+                android:layout_marginTop="0dp"
+                style="@style/header3"
+                android:textColor="@color/second"
+                android:layout_below="@id/im_ic_setting"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:padding="10dp"
+            android:layout_marginLeft="30dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center">
 
         </RelativeLayout>
 

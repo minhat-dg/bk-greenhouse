@@ -4,20 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background.xml" value="0.143" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background_bottom_sheet.xml" value="0.1645" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background_orange.xml" value="0.143" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background_second.xml" value="0.1625" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/background_white.xml" value="0.1625" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/button_login.xml" value="0.1645" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/checkbox.xml" value="0.1645" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/edit_text.xml" value="0.1645" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/ic_humid.xml" value="0.1645" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/ic_temp.xml" value="0.1115" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/thumb.xml" value="0.1505" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/track.xml" value="0.1505" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/item_spiner.xml" value="0.13645833333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/item_spiner_category.xml" value="0.2125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/item_spiner_selected.xml" value="0.2125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/loading_please_wait.xml" value="0.175" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/progress_dialog.xml" value="0.536" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/schedule_popup.xml" value="0.2" />
       </map>
     </option>
   </component>
