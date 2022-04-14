@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_bottom_sheet"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mức thông số chuẩn:"
+        style="@style/header2"/>
+
+    <LinearLayout
+        android:id="@+id/sensor_popup_line1"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_sensor"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/body_bold"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Nhiệt độ:" />
+
+        <EditText
+            android:id="@+id/et_temp_from"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:paddingHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="đến"
+            android:layout_marginHorizontal="10dp"
+            style="@style/body_bold"/>
+
+        <EditText
+            android:id="@+id/et_temp_to"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:paddingHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ºC"
+            android:layout_marginHorizontal="10dp"
+            style="@style/body_bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sensor_popup_line2"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensor_popup_line1"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/body_bold"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Độ ẩm không khí:" />
+
+        <EditText
+            android:id="@+id/et_humid_from"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:paddingHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="đến"
+            android:layout_marginHorizontal="10dp"
+            style="@style/body_bold"/>
+
+        <EditText
+            android:id="@+id/et_humid_to"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:paddingHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:layout_marginHorizontal="10dp"
+            style="@style/body_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sensor_popup_line3"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensor_popup_line2"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/body_bold"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Độ ẩm đất:" />
+
+        <EditText
+            android:id="@+id/et_moisture_from"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:paddingHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="đến"
+            android:layout_marginHorizontal="10dp"
+            style="@style/body_bold"/>
+
+        <EditText
+            android:id="@+id/et_moisture_to"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:paddingHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:layout_marginHorizontal="10dp"
+            style="@style/body_bold"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_sensor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sensor_popup_line3"
+        android:layout_marginTop= "30dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="Lưu lại"
+        style="@style/header2"
+        android:textAllCaps="false"
+        android:textColor="@color/light_yellow"
+        android:background="@drawable/button_login"/>
+
+</RelativeLayout>

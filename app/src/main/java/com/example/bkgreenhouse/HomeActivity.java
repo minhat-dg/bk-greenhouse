@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,7 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -54,7 +59,11 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomSheetDialog bottomSheetDialog;
     Spinner spinnerPeriod, spinnerEvery, spinnerStartOur, spinnerStartMinute,  spinnerEndHour, spinnerEndMinute, spinnerWarn;
+    CheckBox cbAutoMode, cbScheduleMode, cbStop;
+    Button btnSaveSchedule, btnSaveSensor;
+    RelativeLayout blockOption;
     TextView timeUnit;
+    EditText tempFrom, tempTo, humidFrom, humidTo, moistureFrom, moistureTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +114,15 @@ public class HomeActivity extends AppCompatActivity {
                 createScheduleDialog();
             }
         });
+
+        binding.btnSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createSensorDialog();
+            }
+        });
     }
+
 
     private void loadData() {
         new GetData("led").execute(apiUrl.getLED_GET_URL());
@@ -149,11 +166,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void toggleBtnPump2(String value) {
-        if (value.equals("4")) {
-            binding.btnTemp.setChecked(true);
-        } else {
-            binding.btnTemp.setChecked(false);
-        }
+        binding.btnTemp.setChecked(value.equals("4"));
     }
 
     private void setMoisture(String value) {
@@ -169,20 +182,25 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void toggleBtnPump1(String value) {
-        if (value.equals("2")) {
-            binding.btnWater.setChecked(true);
-        } else {
-            binding.btnWater.setChecked(false);
-        }
+        binding.btnWater.setChecked(value.equals("2"));
     }
 
     private void toggleBtnLight(String value) {
-        if (value.equals("1")) {
-            binding.btnLight.setChecked(true);
-        }
-        else{
-            binding.btnLight.setChecked(false);
-        }
+        binding.btnLight.setChecked(value.equals("1"));
+    }
+
+    private void createSensorDialog() {
+        bottomSheetDialog = new BottomSheetDialog(HomeActivity.this, R.style.BottomSheetTheme);
+        View bottomSheetView = getLayoutInflater().inflate(R.layout.sensor_popup, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
+
+        tempFrom = bottomSheetView.findViewById(R.id.et_temp_from);
+        tempTo = bottomSheetView.findViewById(R.id.et_temp_to);
+        humidFrom = bottomSheetView.findViewById(R.id.et_humid_from);
+        humidTo = bottomSheetView.findViewById(R.id.et_humid_to);
+        moistureFrom = bottomSheetView.findViewById(R.id.et_moisture_from);
+        moistureTo = bottomSheetView.findViewById(R.id.et_moisture_to);
     }
 
     public void createScheduleDialog(){
@@ -200,6 +218,95 @@ public class HomeActivity extends AppCompatActivity {
         spinnerEndMinute = bottomSheetView.findViewById(R.id.spinner_end_minute);
         spinnerWarn =  bottomSheetView.findViewById(R.id.spinner_warn);
         initSpinner();
+
+        cbAutoMode = bottomSheetView.findViewById(R.id.cb_auto);
+        cbScheduleMode = bottomSheetView.findViewById(R.id.cb_schedule);
+        cbStop = bottomSheetView.findViewById(R.id.cb_stop);
+        blockOption = bottomSheetView.findViewById(R.id.blockOption);
+        btnSaveSchedule = bottomSheetView.findViewById(R.id.btn_save_schedule);
+
+        loadWaterMode();
+
+        cbAutoMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                setWaterMode(compoundButton.isChecked());
+            }
+        });
+
+        cbScheduleMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                setWaterMode(!compoundButton.isChecked());
+            }
+        });
+
+        btnSaveSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveSchedule(cbAutoMode.isChecked());
+                bottomSheetDialog.hide();
+            }
+        });
+    }
+
+    private void saveSchedule(boolean checked) {
+        //save mode
+        SharedPreferences preferences = getSharedPreferences("waterMode", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        if (!checked) {
+            editor.putString("mode", "false");
+            editor.putString("period", String.valueOf(spinnerPeriod.getSelectedItemPosition()));
+            editor.putString("every", String.valueOf(spinnerEvery.getSelectedItemPosition()));
+            editor.putString("start_hour", String.valueOf(spinnerStartOur.getSelectedItemPosition()));
+            editor.putString("start_minute", String.valueOf(spinnerStartMinute.getSelectedItemPosition()));
+            editor.putString("end_hour", String.valueOf(spinnerEndHour.getSelectedItemPosition()));
+            editor.putString("end_minute", String.valueOf(spinnerEndMinute.getSelectedItemPosition()));
+            editor.putString("stop", String.valueOf(cbStop.isChecked()));
+            editor.putString("warn", String.valueOf(spinnerWarn.getSelectedItemPosition()));
+        } else {
+            editor.putString("mode", "true");
+        }
+        editor.apply();
+    }
+
+    private void setWaterMode(boolean mode) {
+        //True is auto, False is schedule
+        if (mode) {
+            cbAutoMode.setChecked(true);
+            cbScheduleMode.setChecked(false);
+            blockOption.setVisibility(View.GONE);
+        }
+        else {
+            cbAutoMode.setChecked(false);
+            cbScheduleMode.setChecked(true);
+            blockOption.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void loadWaterMode() {
+        SharedPreferences preferences = getSharedPreferences("waterMode", MODE_PRIVATE);
+        String mode = preferences.getString("mode", "");
+        setWaterMode(mode.equals("true"));
+        if (mode.equals("false")) {
+            Log.d("http", preferences.getString("period", ""));
+            int periodIdx = Integer.parseInt(preferences.getString("period", ""));
+            int everyIdx = Integer.parseInt(preferences.getString("every", ""));
+            int startHourIdx = Integer.parseInt(preferences.getString("start_hour", ""));
+            int startMinuteIdx = Integer.parseInt(preferences.getString("start_minute", ""));
+            int endHourIdx = Integer.parseInt(preferences.getString("end_hour", ""));
+            int endMinuteIdx = Integer.parseInt(preferences.getString("end_minute", ""));
+            boolean stop = Boolean.parseBoolean(preferences.getString("stop", ""));
+            int warnIdx = Integer.parseInt(preferences.getString("warn", ""));
+            spinnerPeriod.setSelection(periodIdx);
+            spinnerEvery.setSelection(everyIdx);
+            spinnerStartOur.setSelection(startHourIdx);
+            spinnerStartMinute.setSelection(startMinuteIdx);
+            spinnerEndHour.setSelection(endHourIdx);
+            spinnerEndMinute.setSelection(endMinuteIdx);
+            cbStop.setChecked(stop);
+            spinnerWarn.setSelection(warnIdx);
+        }
     }
 
     private void initSpinner() {
@@ -220,7 +327,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
         ItemAdapter hours = new ItemAdapter(this, R.layout.item_spiner_selected, getListOur());
         ItemAdapter minutes = new ItemAdapter(this, R.layout.item_spiner_selected, getListMinute());
         spinnerStartOur.setAdapter(hours);
@@ -277,8 +383,7 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 list.add(new SpinnerItem("0"));
         }
-        Log.d("spinner", list.get(0).getName());
-        Log.d("spinner", unit);
+
         return list;
     }
 
@@ -313,6 +418,7 @@ public class HomeActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             return null;
         }
 
