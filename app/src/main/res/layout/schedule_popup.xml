@@ -98,7 +98,7 @@
 
             <Spinner
                 android:id="@+id/spinner_every"
-                android:layout_width="70dp"
+                android:layout_width="185dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@android:color/transparent"/>
@@ -166,89 +166,14 @@
 
             <TextView
                 style="@style/body_bold"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Kết thúc:" />
-
-            <Spinner
-                android:id="@+id/spinner_end_hour"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@android:color/transparent"/>
-
-            <TextView
-                style="@style/body_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="giờ" />
-
-            <Spinner
-                android:id="@+id/spinner_end_minute"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@android:color/transparent"/>
-
-            <TextView
-                style="@style/body_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="phút" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/schedule_popup_line7"
-            android:layout_width="match_parent"
-            android:gravity="center_vertical"
-            android:layout_marginTop="20dp"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            android:layout_below="@id/schedule_popup_line6"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_cb_stop"
-                style="@style/body_bold"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="Dừng khi thông số đạt chuẩn" />
+                android:text="Báo động khi thông số ngoài mức an toàn:" />
 
             <CheckBox
-                android:id="@+id/cb_stop"
+                android:id="@+id/cb_warn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/schedule_popup_line8"
-            android:layout_width="match_parent"
-            android:gravity="center_vertical"
-            android:layout_below="@id/schedule_popup_line7"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/body_bold"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:text="Báo động khi thông số ngoài mức an toàn sau:" />
-
-            <Spinner
-                android:id="@+id/spinner_warn"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@android:color/transparent"/>
-
-            <TextView
-                style="@style/body_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="phút" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_bottom_sheet"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:context=".SetSensorActivity">
 
     <TextView
-        android:id="@+id/tv_sensor"
+        android:id="@+id/header_set_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mức thông số chuẩn:"
-        style="@style/header2"/>
+        android:text="Vui lòng thiết lập thông số cảm biến!"
+        style="@style/header3"
+        android:textColor="@color/dark_grey"
+        android:layout_marginTop="50dp"/>
 
     <LinearLayout
         android:id="@+id/sensor_popup_line1"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_sensor"
+        android:layout_below="@id/header_set_sensor"
         android:orientation="horizontal">
 
         <TextView

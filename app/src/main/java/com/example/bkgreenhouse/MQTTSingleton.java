@@ -3,6 +3,7 @@ package com.example.bkgreenhouse;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -70,9 +71,16 @@ public class MQTTSingleton {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
-                    Log.d("mqtt", "CONNECT SUCCESSFUL");
-                    Intent intent = new Intent(mContext, HomeActivity.class);
-                    mContext.startActivity(intent);
+                    SharedPreferences preferences = mContext.getSharedPreferences("sensor", Context.MODE_PRIVATE);
+                    String isInit = preferences.getString("is_init", "");
+                    if(isInit.equals("true")){
+                        Intent intent = new Intent(mContext, HomeActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(mContext, SetSensorActivity.class);
+                        mContext.startActivity(intent);
+                    }
                 }
 
                 @Override
