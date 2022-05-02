@@ -3,7 +3,9 @@ package com.example.bkgreenhouse;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -145,6 +147,14 @@ public class HomeActivity extends AppCompatActivity {
                 } else {
                     mqtt.publish(topicBuzzer, buzzerOff);
                 }
+            }
+        });
+
+        binding.btnAnalyze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AnalyzeActivity.class);
+                startActivity(intent);
             }
         });
     }

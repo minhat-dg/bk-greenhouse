@@ -68,10 +68,19 @@ public class ApiUrl {
                 trigger = "*/" +triggerEvery+ " * * * *";
                 break;
             case "giờ":
-                trigger = "0 */" + triggerEvery + " * * *";
+                if (triggerEvery.equals("1")){
+                    trigger = "0" + " * * * *";
+                }
+                else {
+                    trigger = "0 */" + triggerEvery + " * * *";
+                }
                 break;
             case "ngày":
-                trigger = triggerMinute + " " + triggerHour + " 1/" + triggerEvery + " * *";
+                if (triggerEvery.equals("1")){
+                    trigger = triggerMinute + " " + triggerHour + " *" + " * *";
+                } else {
+                    trigger = triggerMinute + " " + triggerHour + " 1/" + triggerEvery + " * *";
+                }
                 break;
             case "tuần":
                 switch (triggerEvery){

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BKGreenHouse">
         <activity
+            android:name=".AnalyzeActivity"
+            android:exported="false" />
+        <activity
             android:name=".SetSensorActivity"
             android:exported="false" />
         <activity
