@@ -55,6 +55,7 @@ import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
+    public CustomProgressDialog dialog;
     ApiUrl apiUrl = new ApiUrl();
     MQTTSingleton mqtt = MQTTSingleton.getInstance(HomeActivity.this);
     String KEY = "";
@@ -89,6 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        dialog = new CustomProgressDialog(HomeActivity.this);
         loadData();
         subscribeMQTT();
 
@@ -161,9 +163,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void loadData() {
+        dialog.show();
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         KEY = preferences.getString("key", "");
-
         new GetData("temp").execute(apiUrl.getTEMP_GET_URL());
         new GetData("humi").execute(apiUrl.getHUMID_GET_URL());
         new GetData("moisture").execute(apiUrl.getMOISTURE_GET_URL());
@@ -205,6 +207,7 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case "buzzer":
                 toggleBtnBuzzer(substring);
+                dialog.hide();
                 break;
         }
     }

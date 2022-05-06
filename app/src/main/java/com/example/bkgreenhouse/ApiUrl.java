@@ -12,6 +12,9 @@ public class ApiUrl {
     private String MOISTURE_GET_URL = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-moisture/data/retain";
     private String CREATE_ACTION = "https://io.adafruit.com/api/v2/luongcao2202/actions";
     private String DELETE_ACTION = "https://io.adafruit.com/api/v2/luongcao2202/triggers/";
+    private String TEMP_GET = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-temp/data";
+    private String HUMID_GET = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-humi/data";
+    private String MOISTURE_GET = "https://io.adafruit.com/api/v2/luongcao2202/feeds/bbc-moisture/data";
     private String FEED_LED = "1822260";
     private String FEED_MOISTURE = "1852970";
     private String FEED_HUMID = "1833235";
@@ -19,6 +22,14 @@ public class ApiUrl {
     private String FEED_PUMP1 = "1833222";
     private String FEED_PUMP2 = "1852973";
     private String FEED_TEMP = "1825911";
+
+    public String getHUMID_GET() {
+        return HUMID_GET;
+    }
+
+    public String getMOISTURE_GET() {
+        return MOISTURE_GET;
+    }
 
     public String getFEED_LED() {
         return FEED_LED;
@@ -147,5 +158,9 @@ public class ApiUrl {
 
     public String getBUZZER_GET_URL() {
         return BUZZER_GET_URL;
+    }
+
+    public String getTEMP_GET() {
+        return TEMP_GET;
     }
 }

@@ -15,11 +15,14 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/ic_temp.xml" value="0.1115" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/thumb.xml" value="0.1505" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/drawable/track.xml" value="0.1505" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_analyze.xml" value="0.18020833333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_analyze.xml" value="0.2" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/activity_set_sensor.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/fragment_humid.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/fragment_moisture.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/fragment_temp.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/item_spiner.xml" value="0.13645833333333332" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/item_spiner_category.xml" value="0.2125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BKGreenHouse/app/src/main/res/layout/item_spiner_selected.xml" value="0.2125" />
