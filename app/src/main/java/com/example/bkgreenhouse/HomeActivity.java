@@ -182,6 +182,7 @@ public class HomeActivity extends AppCompatActivity {
         mqtt.subscribe(topicHumid, HomeActivity.this);
         mqtt.subscribe(topicTemp, HomeActivity.this);
         mqtt.subscribe(topicBuzzer, HomeActivity.this);
+        mqtt.subscribe(topicMoisture, HomeActivity.this);
     }
 
 

@@ -117,7 +117,6 @@ public class TempFragment extends Fragment {
         lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(){
             @Override
             public String getFormattedValue(float value) {
-                Log.d("detail", "Index: " + String.valueOf(value));
                 switch ((int) value){
                     case 1: return "Sáng";
                     case 2: return "Chiều";
@@ -168,7 +167,7 @@ public class TempFragment extends Fragment {
     public String getISODay(int amount){
         DateTimeFormatter formatter
                 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm'Z'");
-        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC).with(LocalTime.MAX).minus(amount, ChronoUnit.DAYS).minusHours(7);
+        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC).with(LocalTime.MIN).minus(amount, ChronoUnit.DAYS).minusHours(7);
         return now.format(formatter);
     }
 
@@ -218,14 +217,11 @@ public class TempFragment extends Fragment {
         Type type = new TypeToken<List<DataPointModel>>(){}.getType();
         List<DataPointModel> dataPointList = gson.fromJson(s, type);
         for (DataPointModel dataPoint : dataPointList){
-            Log.d("detail", dataPoint.id + "-" + dataPoint.value + "-" + dataPoint.created_at);
             Date date = convertDateFromISO(dataPoint.created_at);
-            Log.d("detail", "Date: " + date.toString());
             String createAt = date.toString().split(" ")[3].substring(0,5);
             dataGroup.addDataPoint(Float.parseFloat(dataPoint.value), createAt);
         }
         for (int i = 1; i <= 3; i++){
-            Log.d("detail", "Lần: "+String.valueOf(i));
             dataSet.add(new Entry(i, dataGroup.getValueOf(i)));
         }
         initLineChartDataSet(dataSet);
