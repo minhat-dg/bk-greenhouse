@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
     String KEY = "";
 
     String opLT = "lt", opGT = "gt";
-    String pump1on = "2", pump1off = "3", pump2on = "4", pump2off = "5", ledOn = "1", ledOff = "2", buzzerOn = "6", buzzerOff = "7";
+    String pump1on = "2", pump1off = "3", pump2on = "4", pump2off = "5", ledOn = "1", ledOff = "0", buzzerOn = "6", buzzerOff = "7";
     int everyIdx = 0, periodIdx = 0;
 
     String topicTemp = "luongcao2202/feeds/bbc-temp";

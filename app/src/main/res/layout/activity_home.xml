@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/tv_temp_value"
-                android:layout_width="30dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:text="..."
                 style="@style/header3"
@@ -93,7 +93,7 @@
 
             <TextView
                 android:id="@+id/tv_humid_value"
-                android:layout_width="30dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:text="..."
                 style="@style/header3"
@@ -136,7 +136,7 @@
 
             <TextView
                 android:id="@+id/tv_moister_value"
-                android:layout_width="30dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:text="..."
                 style="@style/header3"
